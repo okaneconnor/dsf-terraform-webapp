@@ -30,3 +30,14 @@ variable "tags" {
   description = "Extra tags to apply to every taggable resource."
   default     = {}
 }
+
+variable "log_retention_days" {
+  type        = number
+  description = "Days to keep logs in the Log Analytics workspace. 30 to 730."
+  default     = 30
+
+  validation {
+    condition     = var.log_retention_days >= 30 && var.log_retention_days <= 730
+    error_message = "log_retention_days must be between 30 and 730."
+  }
+}
